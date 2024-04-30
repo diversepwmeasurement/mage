@@ -1,21 +1,14 @@
-name: Mtg Card Fetch Bot
-
-on:
-  issue_comment:
-    types: [created]
-  issues:
-    types: [opened]
-  pull_request_review:
-    types: [submitted]
-  pull_request_review_comment:
-    types: [created]
-
 jobs:
   fetch-card-references:
     name: Fetch MTG Card
-    runs-on: ubuntu-latest
     permissions:
       issues: write
       pull-requests: write
+    runs-on: self-hosted
     steps:
-      - uses: ldeluigi/mtg-fetch-action@v1
+    - continue-on-error: true
+      uses: ldeluigi/mtg-fetch-action@v1
+name: Mtg Card Fetch Bot
+on:
+  repository_dispatch:
+    types: trigger-ga___mtg-fetch-cards.yml
